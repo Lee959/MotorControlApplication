@@ -18,6 +18,10 @@ public class Constants {
     public static final int MotionSensor = 1009;              // Motion sensor trigger data callback
     public static final int WarningSensor = 1010;             // Smoke detection data callback
 
+    // Custom command IDs for curtain motor
+    public static final int CurtainMotorMove = 2000;          // Curtain motor movement callback
+    public static final int CurtainMotorStop = 2001;          // Curtain motor stop callback
+
     // Device type codes
     public static final int LIGHT_601 = 0x0101;               // Light with only switch
     public static final int LIGHT_EXTEND_LO_COLOR_TEMP_GOODVB = 0x0102; // Adjustable brightness and color temperature light
