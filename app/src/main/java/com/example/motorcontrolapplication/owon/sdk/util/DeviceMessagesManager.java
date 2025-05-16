@@ -7,10 +7,7 @@ import com.example.motorcontrolapplication.EPListBean;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Device message manager class that handles communication with devices and gateways.
- * This class encapsulates methods for controlling and querying devices such as lights, motors, sensors, etc.
- */
+
 public class DeviceMessagesManager {
 
     private static DeviceMessagesManager instance;
@@ -38,39 +35,24 @@ public class DeviceMessagesManager {
     }
 
     public void GetEpList() {
-        // In a real application, this would send a request to the server
-        // For this demo, we'll simulate a response
+        // TODO: Simulation Here
         simulateDeviceListResponse();
     }
 
-    /**
-     * Control the curtain motor movement
-     *
-     * @param device    The curtain motor device
-     * @param direction 1 for forward rotation (open), 0 for backward rotation (close)
-     */
+
     public void SmartCurtainMove(EPListBean device, int direction) {
-        // In a real application, this would send a command to the device
-        // For this demo, we'll just simulate a success response
+        // TODO: Simulate Here
         simulateCurtainMoveResponse(device, direction);
     }
 
-    /**
-     * Stop the curtain motor
-     *
-     * @param device The curtain motor device
-     */
     public void SmartCurtainStop(EPListBean device) {
-        // In a real application, this would send a command to the device
-        // For this demo, we'll just simulate a success response
+        // TODO: Simulate Here
         simulateCurtainStopResponse(device);
     }
 
-    // Simulation methods for testing
+    /*              Simulation methods for testing              */ 
 
-    /**
-     * Simulate a device list response for demonstration purposes.
-     */
+
     private void simulateDeviceListResponse() {
         // Create a list of simulated devices
         List<EPListBean> devices = new ArrayList<>();
@@ -95,8 +77,6 @@ public class DeviceMessagesManager {
      * Simulate a curtain movement response
      */
     private void simulateCurtainMoveResponse(EPListBean device, int direction) {
-        // In a real application, this would handle the response from the server
-        // For this demo, we'll just simulate a success message
         for (SocketMessageListener listener : listeners) {
             String message = "窗帘电机 " + (direction == 1 ? "正转(打开)" : "反转(关闭)") + " 命令已发送";
             listener.getMessage(2000, message); // Using a custom command ID
@@ -107,8 +87,6 @@ public class DeviceMessagesManager {
      * Simulate a curtain stop response
      */
     private void simulateCurtainStopResponse(EPListBean device) {
-        // In a real application, this would handle the response from the server
-        // For this demo, we'll just simulate a success message
         for (SocketMessageListener listener : listeners) {
             String message = "窗帘电机停止命令已发送";
             listener.getMessage(2001, message); // Using a custom command ID

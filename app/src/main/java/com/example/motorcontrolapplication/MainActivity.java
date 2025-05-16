@@ -1,19 +1,20 @@
 package com.example.motorcontrolapplication;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.motorcontrolapplication.owon.sdk.util.Constants;
 import com.example.motorcontrolapplication.owon.sdk.util.DeviceMessagesManager;
 import com.example.motorcontrolapplication.owon.sdk.util.SocketMessageListener;
+import com.example.motorcontrolapplication.DeviceListBean;
 
 import java.util.List;
-import com.example.motorcontrolapplication.DeviceListBean;
+
 
 public class MainActivity extends AppCompatActivity implements SocketMessageListener {
 
@@ -27,21 +28,17 @@ public class MainActivity extends AppCompatActivity implements SocketMessageList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize views
         btnForward = findViewById(R.id.btn_forward);
         btnBackward = findViewById(R.id.btn_backward);
         btnStop = findViewById(R.id.btn_stop);
         tvStatus = findViewById(R.id.tv_status);
         resultTextView = findViewById(R.id.result_textView);
 
-        // Fix the button text (there was an error in the XML)
         btnStop.setText("停止");
 
-        // Initialize device manager
         deviceManager = DeviceMessagesManager.getInstance();
         deviceManager.registerMessageListener(this);
 
-        // Set click listeners
         btnForward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,14 +72,12 @@ public class MainActivity extends AppCompatActivity implements SocketMessageList
             }
         });
 
-        // Get device list
         deviceManager.GetEpList();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Unregister the listener to avoid memory leaks
         deviceManager.unregisterMessageListener(this);
     }
 
@@ -109,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements SocketMessageList
                     case Constants.ZigBeeGetEPList:
                         handleDeviceList(bean);
                         break;
-                    // Add other cases if needed for this application
                     default:
                         updateResultText("收到未处理消息: " + commandID);
                         break;
@@ -120,19 +114,15 @@ public class MainActivity extends AppCompatActivity implements SocketMessageList
 
     private void handleDeviceList(Object bean) {
         if (bean instanceof DeviceListBean) {
-            // Cast the object to DeviceListBean
             DeviceListBean deviceListBean = (DeviceListBean) bean;
 
-            // Get the list of devices
             List<EPListBean> devices = deviceListBean.getDevices();
 
-            // Check if any devices were found
             if (devices == null || devices.isEmpty()) {
                 updateStatus("未发现设备");
                 return;
             }
 
-            // Find curtain motor device
             for (EPListBean device : devices) {
                 if (device.getDeviceType() == DeviceTypeCode.WARN_MOTOR) {
                     selectedDevice = device;

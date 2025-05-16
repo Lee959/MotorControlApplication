@@ -1,12 +1,8 @@
 package com.example.motorcontrolapplication.owon.sdk.util;
 
-/**
- * Constants class that defines various constants used in the application.
- * This includes command IDs for callbacks and device type codes.
- */
+
 public class Constants {
 
-    // Callback command IDs
     public static final int UpdateEPList = 1001;              // Get gateway list callback
     public static final int ZigBeeGetEPList = 1002;           // Get device list callback
     public static final int SmartLightSetupSwitchgear = 1003; // Set light result callback
@@ -17,12 +13,12 @@ public class Constants {
     public static final int MotionSensorUpdate = 1008;        // Motion sensor query status callback
     public static final int MotionSensor = 1009;              // Motion sensor trigger data callback
     public static final int WarningSensor = 1010;             // Smoke detection data callback
+    
 
-    // Custom command IDs for curtain motor
+    //TODO: Adding Constants Here
     public static final int CurtainMotorMove = 2000;          // Curtain motor movement callback
     public static final int CurtainMotorStop = 2001;          // Curtain motor stop callback
 
-    // Device type codes
     public static final int LIGHT_601 = 0x0101;               // Light with only switch
     public static final int LIGHT_EXTEND_LO_COLOR_TEMP_GOODVB = 0x0102; // Adjustable brightness and color temperature light
 }
